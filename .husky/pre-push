@@ -1,0 +1,5 @@
+echo 'Running pre-push checks... 🚀'
+
+pnpm build || (echo 'Build failed ❌ Cannot push with build errors.'; false)
+
+echo 'All pre-push checks passed! Ready to push 🎉'
