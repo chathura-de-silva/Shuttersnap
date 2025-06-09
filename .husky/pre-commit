@@ -1,0 +1,30 @@
+echo 'Auto-fixing formatting, checking linting and typescript.'
+
+# Auto-format code
+echo 'Formatting code...'
+pnpm format ||
+(
+    echo 'Code formatting failed ❌'
+    false;
+)
+
+# Checking linting issues
+echo 'Checking for linting issues...'
+pnpm lint ||
+(
+    echo 'Linting issues found ❌ Please fix manually.'
+    false;
+)
+
+# Check TypeScript 
+echo 'Checking TypeScript...'
+pnpm check ||
+(
+    echo 'TypeScript issues found ❌ Please fix manually.'
+    false;
+)
+
+# Add the formatted/fixed files back to staging
+git add .
+
+echo 'All checks passed and code auto-fixed! ✅'
