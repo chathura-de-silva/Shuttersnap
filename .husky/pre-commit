@@ -1,18 +1,9 @@
 echo 'Auto-fixing formatting, checking linting and typescript.'
 
-# Auto-format code
-echo 'Formatting code...'
-pnpm format ||
+# Runs Prettier to format code and Eslint to check for linting issues
+npx lint-staged ||
 (
-    echo 'Code formatting failed ❌'
-    false;
-)
-
-# Checking linting issues
-echo 'Checking for linting issues...'
-pnpm lint ||
-(
-    echo 'Linting issues found ❌ Please fix manually.'
+    echo 'Staged files have linting/formatting issues ❌'
     false;
 )
 
