@@ -3,7 +3,7 @@
 	import { Skeleton } from '$lib/components/ui/skeleton/index.js';
 
 	export let selectedImage: string | null = null;
-	export let placeholder: string = 'Click Here or Drag and Drop your Image';
+	export let placeholder: string = 'Click Here or Drag and Drop your Raw Image';
 	export let className: string = '';
 	export let onFileSelected: ((file: File, imageUrl: string) => void) | undefined = undefined;
 	export let onFileRemoved: (() => void) | undefined = undefined;
@@ -15,7 +15,7 @@
 	// eslint-disable-next-line
 	let dcraw: any;
 	let isProcessing = false;
-
+	let isRaw = true;
 	const rawExtensions = ['.arw', '.srf', '.sr2', 'cr2', 'cr3', '.nef', '.nrw', '.raf', '.rw2'];
 
 	onMount(async () => {
@@ -76,9 +76,9 @@
 
 		selectedFile = file;
 		isProcessing = true;
-
+		isRaw = isRawFile(file.name);
 		try {
-			if (isRawFile(file.name)) {
+			if (isRaw) {
 				if (!dcraw) {
 					isProcessing = false;
 					return;
@@ -103,26 +103,16 @@
 				};
 				reader.readAsArrayBuffer(file);
 			} else if (file.type.startsWith('image/')) {
-				processRegularImage(file);
+				placeholder = "Please upload the Raw file of the image you've selected";
+				isProcessing = false;
 			} else {
-				console.error('Unsupported file type');
+				placeholder = 'Unsupported file type. Please upload a Raw image.';
 				isProcessing = false;
 			}
 		} catch (error) {
 			console.error('Error processing file:', error);
 			isProcessing = false;
 		}
-	}
-
-	function processRegularImage(file: File) {
-		const reader = new FileReader();
-		reader.onload = (e) => {
-			const imageUrl = e.target?.result as string;
-			selectedImage = imageUrl;
-			isProcessing = false;
-			onFileSelected?.(file, imageUrl);
-		};
-		reader.readAsDataURL(file);
 	}
 
 	function removeImage() {
@@ -200,7 +190,7 @@
 	<input
 		bind:this={fileInput}
 		type="file"
-		accept="image/*,.raw,.cr2,.nef,.arw,.dng,.raf,.orf,.rw2,.pef,.srw,.x3f"
+		accept={rawExtensions.join(',')}
 		class="hidden"
 		on:change={handleFileInput}
 	/>
