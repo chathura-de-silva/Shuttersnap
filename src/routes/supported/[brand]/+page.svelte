@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { supportedBrands } from '$lib/utils';
 	import { page } from '$app/state';
+	import { base } from '$app/paths';
 	const { data } = $props();
 
 	const currentBrand = $derived(page.params.brand);
@@ -31,7 +32,7 @@
 <ul>
 	{#each supportedBrands as brand (brand.path)}
 		<li>
-			<a href="/supported/{brand.path}">
+			<a href="{base}/supported/{brand.path}">
 				{brand.name} ({brand.path})
 			</a>
 		</li>
