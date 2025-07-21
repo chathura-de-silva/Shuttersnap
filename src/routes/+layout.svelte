@@ -5,6 +5,7 @@
 	import { ModeWatcher } from 'mode-watcher';
 	import { page } from '$app/state';
 	import { cn, supportedBrands } from '$lib/utils';
+	import { base } from '$app/paths';
 	let { children } = $props();
 
 	const baseRoutes = {
@@ -26,13 +27,13 @@
 		<NavigationMenu.Item
 			class={cn('font-semibold', page.url.pathname === baseRoutes.app && 'bg-accent rounded-lg')}
 		>
-			<NavigationMenu.Link href={baseRoutes.app}>App</NavigationMenu.Link>
+			<NavigationMenu.Link href={base + baseRoutes.app}>App</NavigationMenu.Link>
 		</NavigationMenu.Item>
 
 		<NavigationMenu.Item class="relative">
 			<NavigationMenu.Trigger
 				class={cn(
-					page.url.pathname.startsWith(baseRoutes.supportedDevices) && 'bg-accent rounded-lg'
+					page.url.pathname.startsWith(base + baseRoutes.supportedDevices) && 'bg-accent rounded-lg'
 				)}>Supported Devices</NavigationMenu.Trigger
 			>
 			<NavigationMenu.Content
@@ -40,10 +41,10 @@
 			>
 				{#each supportedBrands as brand (brand.path)}
 					<NavigationMenu.Link
-						href={baseRoutes.supportedDevices + '/' + brand.path}
+						href={base + baseRoutes.supportedDevices + '/' + brand.path}
 						class={cn(
 							'block w-full',
-							page.url.pathname.startsWith(baseRoutes.supportedDevices + brand.path) &&
+							page.url.pathname.startsWith(base + baseRoutes.supportedDevices + brand.path) &&
 								'bg-accent rounded-lg'
 						)}>{brand.name}</NavigationMenu.Link
 					>
@@ -57,7 +58,7 @@
 				page.url.pathname.startsWith(baseRoutes.about) && 'bg-accent rounded-lg'
 			)}
 		>
-			<NavigationMenu.Link href={baseRoutes.about}>About</NavigationMenu.Link>
+			<NavigationMenu.Link href={base + baseRoutes.about}>About</NavigationMenu.Link>
 		</NavigationMenu.Item>
 	</NavigationMenu.List>
 
