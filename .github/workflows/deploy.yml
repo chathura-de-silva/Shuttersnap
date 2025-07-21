@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: 'main'
+    branches: ['main']
 
 jobs:
   build_site:
@@ -24,6 +24,9 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Sync SvelteKit (generate .svelte-kit)
+        run: pnpm exec svelte-kit sync
 
       - name: Build
         env:
