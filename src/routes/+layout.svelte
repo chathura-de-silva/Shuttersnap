@@ -4,16 +4,9 @@
 	import '../app.css';
 	import { ModeWatcher } from 'mode-watcher';
 	import { page } from '$app/state';
-	import { cn } from '$lib/utils';
+	import { cn, supportedBrands } from '$lib/utils';
 	let { children } = $props();
 
-	const supportedBrands: { name: string; path: string }[] = [
-		{ name: 'Sony', path: '/sony' },
-		{ name: 'Canon', path: '/canon' },
-		{ name: 'Nikon', path: '/nikon' },
-		{ name: 'Fujifilm', path: '/fuji' },
-		{ name: 'Panasonic', path: '/panasonic' }
-	];
 	const baseRoutes = {
 		app: '/',
 		supportedDevices: '/supported',
@@ -47,7 +40,7 @@
 			>
 				{#each supportedBrands as brand (brand.path)}
 					<NavigationMenu.Link
-						href={baseRoutes.supportedDevices + brand.path}
+						href={baseRoutes.supportedDevices + '/' + brand.path}
 						class={cn(
 							'block w-full',
 							page.url.pathname.startsWith(baseRoutes.supportedDevices + brand.path) &&

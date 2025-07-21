@@ -11,3 +11,12 @@ export type WithoutChild<T> = T extends { child?: any } ? Omit<T, 'child'> : T;
 export type WithoutChildren<T> = T extends { children?: any } ? Omit<T, 'children'> : T;
 export type WithoutChildrenOrChild<T> = WithoutChildren<WithoutChild<T>>;
 export type WithElementRef<T, U extends HTMLElement = HTMLElement> = T & { ref?: U | null };
+
+export type SupportedBrand = { name: string; path: string };
+export const supportedBrands: SupportedBrand[] = [
+	{ name: 'Sony', path: 'sony' },
+	{ name: 'Canon', path: 'canon' },
+	{ name: 'Nikon', path: 'nikon' },
+	{ name: 'Fujifilm', path: 'fuji' },
+	{ name: 'Panasonic', path: 'psonic' }
+];
