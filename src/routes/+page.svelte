@@ -1,19 +1,24 @@
 <script lang="ts">
 	import FileUploader from '$lib/components/file-uploader.svelte';
+	import { extractSonyShutterCount } from '$lib/extractSonyShutterCount';
 
 	let selectedImage: string | null = null;
-	let shutterCount: number = 12345; // Ignore the initial value, it will be updated after EXIF parsing
+	let shutterCount: number | null = null;
+	let cameraModel: string | null = null;
 
-	function handleFileSelected(file: File, imageUrl: string) {
+	async function handleFileSelected(file: File, imageUrl: string) {
 		selectedImage = imageUrl;
 
-		// TO be done: EXIF parsing logic here
-		// Parse EXIF data and update shutterCount
+		// EXIF parsing logic
+		const result = await extractSonyShutterCount(file);
+		shutterCount = result.shutterCount;
+		cameraModel = result.cameraModel;
 	}
 
 	function handleFileRemoved() {
 		selectedImage = null;
-		shutterCount = 0;
+		shutterCount = null;
+		cameraModel = null;
 	}
 </script>
 
@@ -32,8 +37,22 @@
 
 		<div class="flex flex-1 basis-4/5 items-center justify-center text-center">
 			<h1 class="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-7xl">
-				{shutterCount.toLocaleString()}
+				{shutterCount !== null ? shutterCount.toLocaleString() : '...'}
 			</h1>
 		</div>
+		{#if cameraModel}
+			<div
+				class="mt-4 flex flex-1 items-center justify-center text-center opacity-100 transition-opacity duration-300"
+			>
+				<span class="text-lg font-medium">Model: {cameraModel}</span>
+			</div>
+		{:else}
+			<div
+				class="pointer-events-none mt-4 flex flex-1 items-center justify-center text-center opacity-0 select-none"
+				aria-hidden="true"
+			>
+				<span class="text-lg font-medium">&nbsp;</span>
+			</div>
+		{/if}
 	</div>
 </div>
