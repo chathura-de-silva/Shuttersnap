@@ -20,3 +20,11 @@ export const supportedBrands: SupportedBrand[] = [
 	// { name: 'Fujifilm', path: 'fuji' },
 	// { name: 'Panasonic', path: 'psonic' }
 ];
+
+export const baseRoutes = {
+	app: '/',
+	supportedDevices: '/supported',
+	faq: '/faq',
+	about: '/about',
+	github: 'https://github.com/chathura-de-silva/Shuttersnap'
+} as const;

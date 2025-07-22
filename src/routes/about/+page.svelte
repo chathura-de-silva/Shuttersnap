@@ -25,7 +25,7 @@
 				signups, no waiting times for uploading and your raw files never leave your device as all
 				the processing is done on your browser.
 				<br />
-				Also it's worth mentioning that this tool is made possible by, the underlying mechanism of shutter
+				Also it's worth mentioning that this tool is made possible by the underlying mechanism of shutter
 				count extraction introduced by
 				<a
 					href="https://shuttertool.com"
