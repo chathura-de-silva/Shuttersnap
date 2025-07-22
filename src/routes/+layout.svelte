@@ -4,16 +4,9 @@
 	import '../app.css';
 	import { ModeWatcher } from 'mode-watcher';
 	import { page } from '$app/state';
-	import { cn, supportedBrands } from '$lib/utils';
+	import { baseRoutes, cn, supportedBrands } from '$lib/utils';
 	import { base } from '$app/paths';
 	let { children } = $props();
-
-	const baseRoutes = {
-		app: '/',
-		supportedDevices: '/supported',
-		about: '/about',
-		github: 'https://github.com/chathura-de-silva/Shuttersnap'
-	} as const;
 </script>
 
 <ModeWatcher />
@@ -51,7 +44,11 @@
 				{/each}
 			</NavigationMenu.Content>
 		</NavigationMenu.Item>
-
+		<NavigationMenu.Item
+			class={cn('font-semibold', page.url.pathname === baseRoutes.faq && 'bg-accent rounded-lg')}
+		>
+			<NavigationMenu.Link href={base + baseRoutes.faq}>FAQ</NavigationMenu.Link>
+		</NavigationMenu.Item>
 		<NavigationMenu.Item
 			class={cn(
 				'font-semibold',

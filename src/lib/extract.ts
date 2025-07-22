@@ -1,86 +1,7 @@
 // Utility to extract Sony shutter count and camera model from a File (RAW or JPEG)
 // Returns { shutterCount, cameraModel } or nulls if not found
 
-const DSLR = 240;
-const DSL5 = 241;
-const DSLT = 242;
-const ILC1 = 243;
-const ILC2 = 244;
-const ILC3 = 245;
-
-const supportedModels: Record<string, { name: string; type: number }> = {
-	'DSLR-A230': { name: 'A230', type: DSLR },
-	'DSLR-A290': { name: 'A290', type: DSLR },
-	'DSLR-A330': { name: 'A330', type: DSLR },
-	'DSLR-A380': { name: 'A380', type: DSLR },
-	'DSLR-A390': { name: 'A390', type: DSLR },
-	'DSLR-A450': { name: 'A450', type: DSL5 },
-	'DSLR-A500': { name: 'A500', type: DSL5 },
-	'DSLR-A550': { name: 'A550', type: DSL5 },
-	'DSLR-A560': { name: 'A560', type: DSLT },
-	'DSLR-A580': { name: 'A580', type: DSLT },
-	'DSLR-A850': { name: 'A850', type: DSLR },
-	'DSLR-A900': { name: 'A900', type: DSLR },
-	'NEX-3': { name: 'NEX 3', type: DSLT },
-	'NEX-C3': { name: 'NEX C3', type: DSLT },
-	'NEX-F3': { name: 'NEX F3', type: ILC1 },
-	'NEX-3N': { name: 'NEX 3N', type: ILC1 },
-	'NEX-5': { name: 'NEX 5', type: DSLT },
-	'NEX-5N': { name: 'NEX 5N', type: ILC1 },
-	'NEX-5R': { name: 'NEX 5R', type: ILC1 },
-	'NEX-5T': { name: 'NEX 5T', type: ILC1 },
-	'NEX-6': { name: 'NEX 6', type: ILC1 },
-	'NEX-7': { name: 'NEX 7', type: ILC1 },
-	'SLT-A33': { name: 'A 33', type: DSLT },
-	'SLT-A35': { name: 'A 35', type: DSLT },
-	'SLT-A37': { name: 'A 37', type: ILC1 },
-	'SLT-A55': { name: 'A 55', type: DSLT },
-	'SLT-A55V': { name: 'A 55V', type: DSLT },
-	'SLT-A57': { name: 'A 57', type: ILC1 },
-	'SLT-A58': { name: 'A 58', type: ILC1 },
-	'SLT-A65': { name: 'A 65', type: ILC1 },
-	'SLT-A65V': { name: 'A 65V', type: ILC1 },
-	'ILCA-68': { name: 'A 68', type: ILC1 },
-	'SLT-A77': { name: 'A 77', type: ILC1 },
-	'SLT-A77V': { name: 'A 77V', type: ILC1 },
-	'ILCA-77M2': { name: 'A 77 II', type: ILC1 },
-	'SLT-A99': { name: 'A 99', type: ILC1 },
-	'SLT-A99V': { name: 'A 99V', type: ILC1 },
-	'ILCA-99M2': { name: 'A 99 II', type: ILC1 },
-	'ILCE-3000': { name: 'A 3000', type: ILC1 },
-	'ILCE-3500': { name: 'A 3500', type: ILC1 },
-	'ILCE-5000': { name: 'A 5000', type: ILC1 },
-	'ILCE-5100': { name: 'A 5100', type: ILC1 },
-	'ILCE-6000': { name: 'A 6000', type: ILC1 },
-	'ILCE-6001': { name: 'A 6000', type: ILC1 },
-	'ILCE-6100': { name: 'A 6100', type: ILC2 },
-	'ILCE-6300': { name: 'A 6300', type: ILC2 },
-	'ILCE-6400': { name: 'A 6400', type: ILC2 },
-	'ILCE-6500': { name: 'A 6500', type: ILC2 },
-	'ILCE-6600': { name: 'A 6600', type: ILC2 },
-	'ILCE-6700': { name: 'A 6700', type: ILC3 },
-	'ILCE-7C': { name: 'A 7c', type: ILC2 },
-	'ILCE-7CM2': { name: 'A 7c II', type: ILC3 },
-	'ILCE-7CR': { name: 'A 7cR', type: ILC3 },
-	'ILCE-7': { name: 'A 7', type: ILC1 },
-	'ILCE-7M2': { name: 'A 7 II', type: ILC1 },
-	'ILCE-7M3': { name: 'A 7 III', type: ILC2 },
-	'ILCE-7M4': { name: 'A 7 IV', type: ILC2 },
-	'ILCE-7M4A': { name: 'A 7 IVa', type: ILC2 },
-	'ILCE-7R': { name: 'A 7R', type: ILC1 },
-	'ILCE-7RM2': { name: 'A 7R II', type: ILC2 },
-	'ILCE-7RM3': { name: 'A 7R III', type: ILC2 },
-	'ILCE-7RM3A': { name: 'A 7R IIIa', type: ILC2 },
-	'ILCE-7RM4': { name: 'A 7R IV', type: ILC2 },
-	'ILCE-7RM4A': { name: 'A 7R IVa', type: ILC2 },
-	'ILCE-7RM5': { name: 'A 7R V', type: ILC2 },
-	'ILCE-7S': { name: 'A 7S', type: ILC1 },
-	'ILCE-7SM2': { name: 'A 7S II', type: ILC2 },
-	'ILCE-7SM3': { name: 'A 7S III', type: ILC2 },
-	'ILCE-9': { name: 'A 9', type: ILC2 },
-	'ILCE-9M2': { name: 'A 9 II', type: ILC2 },
-	'ILCE-1': { name: 'A 1', type: ILC2 }
-};
+import { sonyModels, sonySeries } from './constants';
 
 // Decipher table for encrypted shutter count
 const dTable: number[] = [];
@@ -198,27 +119,27 @@ export async function extractSonyShutterCount(
 	let wantedTag: number | null = null;
 	let wantedAddr: number | null = null;
 	let decipher = false;
-	if (model in supportedModels) {
-		const cameraType = supportedModels[model].type;
-		if (cameraType === DSLR) {
+	if (model in sonyModels) {
+		const cameraType = sonyModels[model].type;
+		if (cameraType === sonySeries.DSLR) {
 			wantedTag = 32;
 			wantedAddr = 2118;
-		} else if (cameraType === ILC1) {
+		} else if (cameraType === sonySeries.ILC1) {
 			wantedTag = 0x9050;
 			wantedAddr = 50;
 			decipher = true;
-		} else if (cameraType === ILC2) {
+		} else if (cameraType === sonySeries.ILC2) {
 			wantedTag = 0x9050;
 			wantedAddr = 58;
 			decipher = true;
-		} else if (cameraType === ILC3) {
+		} else if (cameraType === sonySeries.ILC3) {
 			wantedTag = 0x9050;
 			wantedAddr = 10;
 			decipher = true;
-		} else if (cameraType === DSL5) {
+		} else if (cameraType === sonySeries.DSL5) {
 			wantedTag = 32;
 			wantedAddr = 330;
-		} else if (cameraType === DSLT) {
+		} else if (cameraType === sonySeries.DSLT) {
 			wantedTag = 32;
 			wantedAddr = 283;
 		}

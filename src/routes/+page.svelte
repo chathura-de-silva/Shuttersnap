@@ -1,6 +1,6 @@
 <script lang="ts">
 	import FileUploader from '$lib/components/file-uploader.svelte';
-	import { extractSonyShutterCount } from '$lib/extractSonyShutterCount';
+	import { extractSonyShutterCount } from '$lib/extract';
 
 	let selectedImage: string | null = null;
 	let shutterCount: number | null = null;
