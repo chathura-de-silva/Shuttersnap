@@ -22,6 +22,11 @@
 	}
 </script>
 
+<svelte:head>
+	<title>Shuttersnap</title>
+	<meta name="description" content="Home page of Shuttersnap." />
+</svelte:head>
+
 <div class="flex h-[calc(100vh-theme(spacing.24))] flex-col p-8 lg:flex-row">
 	<FileUploader
 		bind:selectedImage
