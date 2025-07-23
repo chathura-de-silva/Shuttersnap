@@ -46,7 +46,7 @@
 						no mechanical shutter to wear. Instead, they use an electronic shutter mechanism which does
 						not wear out as you use it. But with many mirrorless cameras, there is an option to use an
 						electronic shutter in addition to the existing mechanical shutter which will not cause an
-						increase in at most shutter count.
+						increase in aforementioned shutter count.
 					</li>
 				</ul>
 			</section>
@@ -105,7 +105,7 @@
 		</div>
 		<div class="text-muted-foreground mt-10 text-center text-xs">
 			<p>
-				Didn't find your answer? Drop me an email on <a
+				Didn't find your answer? Drop me an email at <a
 					href="mailto:ac.chathura@gmail.com"
 					class="text-primary hover:text-primary/80 italic underline-offset-2 transition-colors hover:underline"
 					>ac.chathura@gmail.com</a
