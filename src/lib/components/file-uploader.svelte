@@ -182,7 +182,7 @@
 			</svg>
 		</button>
 	{:else}
-		<div class="absolute inset-0 z-10 flex cursor-pointer items-center justify-center">
+		<div class="absolute inset-0 z-10 flex cursor-pointer items-center justify-center text-center">
 			{placeholder}
 		</div>
 	{/if}
