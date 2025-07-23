@@ -1,6 +1,6 @@
 <script lang="ts">
 	import FileUploader from '$lib/components/file-uploader.svelte';
-	import { extractSonyShutterCount } from '$lib/extractSonyShutterCount';
+	import { extractSonyShutterCount } from '$lib/extract';
 
 	let selectedImage: string | null = null;
 	let shutterCount: number | null = null;
@@ -21,6 +21,11 @@
 		cameraModel = null;
 	}
 </script>
+
+<svelte:head>
+	<title>Shuttersnap</title>
+	<meta name="description" content="Home page of Shuttersnap." />
+</svelte:head>
 
 <div class="flex h-[calc(100vh-theme(spacing.24))] flex-col p-8 lg:flex-row">
 	<FileUploader
