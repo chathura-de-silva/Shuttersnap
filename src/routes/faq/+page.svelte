@@ -87,9 +87,12 @@
 						No. All processing happens locally in your browser. Your RAW files never leave your device.
 					</li>
 					<li>
-						<span class="text-primary font-semibold">Is any data stored?</span><br />
-						No data or images are stored or sent anywhere. Once you close the tab, everything is gone.
-						Literally 100% privacy-friendly.
+						<span class="text-primary font-semibold">Is any data being collected?</span><br />
+						The only information collected is the anonymous page view count incremented by the privacy
+						focused free and open source goat counter. Anything else including images are not stored
+						or sent anywhere. Once you close the tab, everything is gone. The only reason for collecting
+						page view counts is to understand the usage of the tool to determine whether to keep it running
+						or not.
 					</li>
 				</ul>
 			</section>
