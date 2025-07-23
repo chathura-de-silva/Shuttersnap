@@ -1,11 +1,10 @@
 <script lang="ts">
+	import { page } from '$app/state';
 	import { base } from '$app/paths';
-	export let status: number;
-	export let message: string;
 </script>
 
 <svelte:head>
-	<title>{status} Error | Shuttersnap</title>
+	<title>{page.status} Error | Shuttersnap</title>
 </svelte:head>
 
 <div
@@ -16,13 +15,13 @@
 	>
 		<div class="mb-6 flex flex-col items-center">
 			<h1 class="text-primary mb-2 text-9xl font-extrabold tracking-tight drop-shadow-lg">
-				{status}
+				{page.status}
 			</h1>
 			<p class="text-muted-foreground mb-2 text-center text-lg font-medium">
 				Oops! An error occurred.
 			</p>
 			<p class="text-foreground text-md mb-4 text-center">
-				{message ?? 'Unknown error'}
+				{page.error?.message ?? 'Unknown error'}
 			</p>
 		</div>
 		<a
