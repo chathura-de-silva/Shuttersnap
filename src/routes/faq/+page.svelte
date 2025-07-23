@@ -82,11 +82,12 @@
 				<h2 class="text-primary mb-2 text-2xl font-bold">Privacy & Security</h2>
 				<ul class="text-md text-muted-foreground list-inside list-disc space-y-4 pl-4">
 					<li>
-						<span class="font-semibold">Are my photos uploaded to a server?</span><br />
+						<span class="text-primary font-semibold">Are my photos uploaded to a server?</span><br
+						/>
 						No. All processing happens locally in your browser. Your RAW files never leave your device.
 					</li>
 					<li>
-						<span class="font-semibold">Is any data stored?</span><br />
+						<span class="text-primary font-semibold">Is any data stored?</span><br />
 						No data or images are stored or sent anywhere. Once you close the tab, everything is gone.
 						Literally 100% privacy-friendly.
 					</li>
@@ -96,7 +97,8 @@
 				<h2 class="text-primary mb-2 text-2xl font-bold">Troubleshooting</h2>
 				<ul class="text-md text-muted-foreground list-inside list-disc space-y-4 pl-4">
 					<li>
-						<span class="font-semibold">My file isn't working. What should I do?</span><br />
+						<span class="text-primary font-semibold">My file isn't working. What should I do?</span
+						><br />
 						Make sure your file is a supported RAW format and is from a supported camera model. Try another
 						raw file if it still fails.
 					</li>
