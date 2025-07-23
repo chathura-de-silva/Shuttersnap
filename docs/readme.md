@@ -130,6 +130,8 @@ pnpm check
 
 ## 🔍 How It Works
 
+<img src="desktop.png" width="100%"  />
+
 ### File Processing Pipeline
 
 1. **File Selection**: User selects a RAW file via drag-and-drop or file picker
@@ -221,12 +223,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **[Website](https://chathuradesilva.me)** • **[GitHub](https://github.com/chathura-de-silva)** • **[Issues](https://github.com/chathura-de-silva/Shuttersnap/issues)**
 
 </div>
-
-<div style="display: flex; gap: 10px;">
-  <img width="1604" alt="Dark Mobile" src="mobile-dark.png">
-  <img width="1604" alt="Light Mobile" src="mobile-light.png">
-</div>
-
-<br><br>
-
-<img src="desktop.png" width="100%"  />
