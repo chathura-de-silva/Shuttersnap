@@ -61,7 +61,7 @@
 
 	<NavigationMenu.List class="flex items-center gap-4">
 		<NavigationMenu.Item>
-			<NavigationMenu.Link href={baseRoutes.github}>Github</NavigationMenu.Link>
+			<NavigationMenu.Link href={baseRoutes.github} target="_blank">Github</NavigationMenu.Link>
 		</NavigationMenu.Item>
 
 		<NavigationMenu.Item>

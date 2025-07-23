@@ -37,6 +37,10 @@
 			</p>
 			<BuyMeACoffeeButton username="chathuradesilva" />
 			<span class="text-muted-foreground text-xs">Support the project and help keep it free!</span>
+			<span class="text-muted-foreground mt-2 text-xs">
+				Found an issue or want to get in touch? Email me at
+				<a href="mailto:your@email.com" class="text-primary underline">ac.chathura@gmail.com</a>
+			</span>
 		</div>
 	</div>
 </div>
